@@ -1,0 +1,214 @@
+:root {
+    --listItemColor: #d0d2d3;
+    --addressBgc: rgba(255, 255, 255, 0.7);
+    --addressTextColor: rgb(44, 44, 44);
+    --filtersBlockOpacity: 1;
+    --titleBlockOpacity: 0;
+    --logoBGC: rgba(255, 255, 255, 0.7);
+    --logoTextColor: #000;
+}
+
+[app-theme='dark'] {
+    --listItemColor: #e0e3e7;
+    --addressBgc: rgba(0, 0, 0, 0.6);
+    --addressTextColor: rgb(214, 214, 214);
+    --logoBGC: hsl(0deg 0% 17% / 80%);
+    --logoTextColor: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.filters {
+    z-index: 5;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    opacity: var(--filtersBlockOpacity);
+    transition: opacity 0.3s;
+}
+
+.filterTooltip {
+    opacity: var(--filtersBlockOpacity);
+    transition: opacity 0.3s;
+}
+
+.first-line {
+    display: flex;
+    align-items: center;
+}
+
+.locations {
+    align-self: center;
+    padding-left: 12px;
+}
+
+.title_container {
+    margin-top: 20px;
+    margin-left: 20px;
+    z-index: 4;
+    position: absolute;
+}
+
+.title {
+    opacity: var(--titleBlockOpacity);
+    transition: opacity 0.3s;
+}
+
+.title_text {
+    background-color: var(--logoBGC);
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: inline-block;
+    color: var(--logoTextColor);
+    font-weight: 500;
+}
+
+.mapControls {
+    opacity: var(--filtersBlockOpacity);
+    transition: opacity 0.3s;
+}
+
+.callListContainer {
+    margin-bottom: 10px;
+}
+
+.callList {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding-right: 30px;
+    justify-content: flex-end;
+    margin-left: calc((-34px - 18vh) * 2);
+}
+
+.popup_call {
+    border: 2px solid var(--popupBorderColor);
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 4;
+    width: 18vh;
+    height: 18vh;
+    background: var(--popupBorderColor);
+}
+
+.popup_call img {
+    width: 18vh;
+    height: 18vh;
+}
+
+.popup_move {
+    animation-name: popup_move;
+    animation-duration: 1s;
+}
+
+@keyframes popup_move {
+    0% {
+        transform: translate(var(--callListXOffset), var(--callListYOffset)) scale(0.4);
+    }
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+
+.popup_moving {
+    animation-name: call-list-moving;
+    animation-duration: 1s;
+}
+
+@keyframes call-list-moving {
+    0% {
+        transform: translateX(calc(30px + 18vh));
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.ListBlock {
+    .CityList {
+        .MuiMenuItem-root:hover {
+            background-color: var(--listItemColor);
+        }
+
+        .SelectedItem {
+            background-color: var(--listItemColor);
+        }
+    }
+}
+    
+.streamList {
+    z-index: 4;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-width: 60vh;
+}
+
+.fakeStreamLayer {
+    position: absolute;
+    right: 0;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-width: 60vh;
+}
+
+.mapboxgl-ctrl-logo {
+    display: none !important;
+}
+
+video{
+    object-fit: fill;
+}
+
+.scale-up-center {
+    animation-duration: 1s;
+    animation-name: scale-up-center;
+}
+
+@keyframes scale-up-center {
+    0% {
+        transform: translate(var(--xOffset), var(--yOffset)) scale(var(--initialScale));
+    }
+    99%{
+        z-index: 5;
+    }
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}  
+
+.address {
+    background: var(--addressBgc);
+    color: var(--addressTextColor);
+    position: absolute;
+    width: 30vh;
+    animation-name: address_animate;
+    animation-duration: 1s;
+}
+
+.alert-message {
+    background-color: rgba(82, 82, 82, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 15px;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    z-index: 5;
+}
+
+.mapboxgl-canvas {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
